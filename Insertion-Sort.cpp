@@ -20,24 +20,68 @@ void insertionSort(vector<int>& vec) {
     }
 }
 
+template <typename Iter>
+void TemplateInsertionSort(Iter begin, Iter end) {
+    if(begin == end){
+        return;
+    }
+
+    for(Iter outerIter = begin + 1; outerIter != end; outerIter++) {
+        auto key = *outerIter;
+        Iter innerIter = outerIter;
+
+        for(; innerIter != begin; innerIter--) {
+            if(key >= *(innerIter - 1)){
+                break;
+            }
+
+            *innerIter = *(innerIter - 1);
+
+        }
+
+        *innerIter = key;
+    }
+
+}
+
 
 
 int main() {
 
     vector<int> nums {4, 13, 5, 6, 8, 1, 2, 3};
+    vector<string> names {"john", "steve", "barry" ,"hector", "amy", };
 
     for(size_t x : nums) {
         cout << x << " ";
     }
-
     cout << endl;
 
-    insertionSort(nums);
+    for(auto x : names) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    // insertionSort(nums);
+
+    // for(size_t x : nums) {
+    //     cout << x << " ";
+    // }
+
+    TemplateInsertionSort(nums.begin(), nums.end());
+
 
     for(size_t x : nums) {
         cout << x << " ";
     }
+    cout << endl;
 
+
+    TemplateInsertionSort(names.begin(), names.end());
+
+    for(auto x : names) {
+        cout << x << " ";
+    }
+    cout << endl;
 
 
 
