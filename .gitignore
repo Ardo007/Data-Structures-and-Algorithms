@@ -1,0 +1,23 @@
+# VS Code settings (keep them local)
+.vscode/
+
+# Compiled binaries & objects
+*.exe
+*.out
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+
+# Build directories
+build/
+cmake-build-*/
+
+# Debug files
+*.pdb
+*.dSYM/
+
+# Backup / temp
+*~
