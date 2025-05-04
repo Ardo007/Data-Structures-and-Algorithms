@@ -12,6 +12,19 @@ class Graph {
         vector<unordered_set<int>> vec {};
         bool isDirected {};
 
+
+        void dfsHelper(int vertex, vector<bool>& marked) {
+            marked[vertex] = true;
+            cout << vertex <<" ";
+
+            for(auto v : vec[vertex]) {
+                
+                if(!marked[v]){
+                    dfsHelper(v, marked);
+                }
+            }
+        }
+
     public: 
         Graph(int n, bool type) : vec{vector<unordered_set<int>>(n)}, numOfVerticies{n}, isDirected{type} {}
 
@@ -50,13 +63,13 @@ class Graph {
         }
 
 
-        void dfs() {
-
+        void dfs(int vertex) {
+            vector<bool> visited(numOfVerticies, false);
+            dfsHelper(vertex, visited);
+            cout << endl;
         }
 
-        void bfs(){
-
-        }
+    
 
 };
 
@@ -89,8 +102,18 @@ int main() {
 
     directG.print();
 
+    cout << "##########################\n";
 
 
+    Graph G3(6, false);
+    G3.addEdge(0, 4);
+    G3.addEdge(0, 5);
+    G3.addEdge(4, 5);
+    G3.addEdge(1, 3);
+    G3.addEdge(1, 2);
+    G3.addEdge(2, 3);
+
+    G3.dfs(4);
     
     return 0;
 }
