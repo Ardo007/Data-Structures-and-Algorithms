@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
-#include <cmath>
+#include <queue>
 
 using namespace std;
 
@@ -63,10 +63,43 @@ class Graph {
         }
 
 
-        void dfs(int vertex) {
+        void dfs(unsigned vertex) {
             vector<bool> visited(numOfVerticies, false);
             dfsHelper(vertex, visited);
             cout << endl;
+        }
+
+
+        void bfs(unsigned vertex, unsigned destVertex) {
+            vector<bool> visited(numOfVerticies, false);
+            queue<unsigned> visitQueue;
+            vector<unsigned> edgeTo(numOfVerticies);
+
+            visitQueue.push(vertex);
+            visited[vertex] = true;
+
+            while(!visitQueue.empty()) {
+                unsigned x = visitQueue.front();
+                visitQueue.pop();
+                // cout << "Now visiting " << x << '\n';
+
+                for(auto u : vec[x]) {
+                    if(!visited[u]) {
+                        visitQueue.push(u);
+                        visited[u] = true;
+                        edgeTo[u] = x;
+                    }
+                }
+            }
+
+
+            unsigned u = destVertex;
+            cout << u;
+            while(u != vertex) {
+                u = edgeTo[u];
+                cout << "-" << u;
+            }
+
         }
 
     
@@ -77,44 +110,55 @@ class Graph {
 
 
 int main() {
-    Graph G(5, false);
-    G.addEdge(1, 0);
-    G.addEdge(0, 3);
-    G.addEdge(2, 1);
-    G.addEdge(2, 3);
-    G.addEdge(3, 1);
-    G.addEdge(2, 4);
+    // Graph G(5, false);
+    // G.addEdge(1, 0);
+    // G.addEdge(0, 3);
+    // G.addEdge(2, 1);
+    // G.addEdge(2, 3);
+    // G.addEdge(3, 1);
+    // G.addEdge(2, 4);
 
-    G.isAdjacentTo(2);
+    // G.isAdjacentTo(2);
 
-    G.print();
+    // G.print();
 
-    cout << "##########################\n";
+    // cout << "##########################\n";
 
-    Graph directG(5, true);
-    directG.addEdge(1, 0);
-    directG.addEdge(0, 3);
-    directG.addEdge(2, 1);
-    directG.addEdge(2, 3);
-    directG.addEdge(3, 1);
+    // Graph directG(5, true);
+    // directG.addEdge(1, 0);
+    // directG.addEdge(0, 3);
+    // directG.addEdge(2, 1);
+    // directG.addEdge(2, 3);
+    // directG.addEdge(3, 1);
 
-    directG.isAdjacentTo(0);
+    // directG.isAdjacentTo(0);
 
-    directG.print();
+    // directG.print();
 
-    cout << "##########################\n";
+    // cout << "##########################\n";
 
 
-    Graph G3(6, false);
-    G3.addEdge(0, 4);
-    G3.addEdge(0, 5);
-    G3.addEdge(4, 5);
-    G3.addEdge(1, 3);
-    G3.addEdge(1, 2);
-    G3.addEdge(2, 3);
+    Graph GR(16, false);
 
-    G3.dfs(4);
+    for(unsigned i = 0; i < 16; ++i)
+    {
+        if(i % 4 != 3)
+        {
+            GR.addEdge(i, i+1);
+        }
+    }
+    for(unsigned i = 0; i < 12; ++i)
+    {
+        GR.addEdge(i, i+4);
+    }
+
+    GR.print();
+
+    GR.dfs(3);
     
+    GR.bfs(3, 0);
+
+
     return 0;
 }
 
