@@ -21,7 +21,7 @@ class GraphWeighted {
         GraphWeighted(int n, bool type = false) : graphList{vector<list<pair<int, int>>>(n)}, numOfVerticies{n}, isDirected{type} {}
 
 
-        void addEdge(int x, int y, int w) {
+        void addEdge(int x, int y, double w) {
             graphList[x].push_back({y, w});
             if(!isDirected) {
                 graphList[y].push_back({x, w});

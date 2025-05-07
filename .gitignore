@@ -21,3 +21,6 @@ cmake-build-*/
 
 # Backup / temp
 *~
+
+test.cpp
+test.hpp
